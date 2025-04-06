@@ -5,13 +5,17 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.bootcamp.demo.engine.Labels;
 import com.bootcamp.demo.engine.Resources;
+import com.bootcamp.demo.engine.widgets.PressableTable;
 import com.bootcamp.demo.events.core.EventListener;
 import com.bootcamp.demo.events.core.EventModule;
+import com.bootcamp.demo.localization.GameFont;
 import com.bootcamp.demo.managers.API;
 import com.bootcamp.demo.pages.core.APage;
 import jdk.internal.loader.Resource;
@@ -27,7 +31,8 @@ public class GameUI extends ScreenAdapter implements Disposable, EventListener {
     @Getter
     private final Cell<APage> mainPageCell;
 
-    @Getter @Setter
+    @Getter
+    @Setter
     private boolean buttonPressed;
 
     public GameUI (Viewport viewport) {
@@ -44,36 +49,40 @@ public class GameUI extends ScreenAdapter implements Disposable, EventListener {
         // construct
         mainPageCell = rootUI.add();
 
-        playground();
+        final Table grid = constructGrid(3, 4);
+        rootUI.add(grid);
+
     }
 
-    private void playground () {
-        final Table testTable = new Table();
-        final Table testTable2 = new Table();
-        final Table testTable3 = new Table();
-        final Table testTable4 = new Table();
-        final Table testTable5 = new Table();
+    private Table constructGrid (int rows, int cols) {
+        final Table grid = new Table();
+        grid.setBackground(Resources.getDrawable("basics/white-squircle-35"));
+        grid.defaults().size(300).space(20);
+        grid.pad(20);
 
-        final Image gift = new Image(Resources.getDrawable("ui/ui-chat-gift-button-icon", Color.GREEN));
-        gift.setScaling(Scaling.fit);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                PressableTable cell = new PressableTable();
+                cell.setBackground(Resources.getDrawable("basics/white-squircle-35", Color.valueOf("74b151")));
 
-        final Table playground = new Table();
-        playground.pad(30);
-        playground.defaults().size(300);
-        playground.add(testTable);
-        playground.add(testTable2);
-        playground.row();
-        playground.add(testTable3);
-        playground.add(gift).size(200, 600);
+                final Image icon = new Image(Resources.getDrawable("brainrot/bombordilo-crocodilo"));
+                icon.setScaling(Scaling.fit);
 
-        final Table playground2 = new Table();
-        playground2.setBackground(Resources.getDrawable("basics/white-squircle-35", Color.GREEN));
-        final Image testImage = new Image();
-        testImage.setDrawable(Resources.getDrawable("basics/white-squircle-35", Color.GREEN));
-        playground2.add(testImage).size(300);
+                final Label label = Labels.make(GameFont.BOLD_40, Color.BLACK, String.valueOf(i * cols + j + 1));
 
-        rootUI.add(playground2);
-        rootUI.debugAll();
+                cell.add(label);
+                cell.setOnClick(() -> {
+                    cell.clearChildren();
+                    cell.add(icon).grow();
+                    cell.setPressedScale(1f);
+                });
+
+                grid.add(cell);
+            }
+            grid.row();
+        }
+
+        return grid;
     }
 
     @Override
