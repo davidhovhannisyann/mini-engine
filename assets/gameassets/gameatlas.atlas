@@ -1,12 +1,12 @@
 
 gameatlas.png
-size: 512, 256
+size: 2048, 2048
 format: RGBA8888
 filter: Linear, Linear
 repeat: none
 basics/white-pixel
   rotate: false
-  xy: 1, 1
+  xy: 2010, 342
   size: 10, 10
   split: 3, 3, 3, 3
   pad: 0, 0, 0, 0
@@ -15,7 +15,7 @@ basics/white-pixel
   index: -1
 basics/white-squircle-35
   rotate: false
-  xy: 228, 19
+  xy: 1879, 1026
   size: 72, 72
   split: 34, 34, 34, 34
   pad: 0, 0, 0, 0
@@ -24,7 +24,7 @@ basics/white-squircle-35
   index: -1
 basics/white-squircle-border-35
   rotate: false
-  xy: 375, 166
+  xy: 1879, 952
   size: 72, 72
   split: 34, 34, 34, 34
   pad: 0, 0, 0, 0
@@ -33,15 +33,166 @@ basics/white-squircle-border-35
   index: -1
 brainrot/bombordilo-crocodilo
   rotate: false
-  xy: 1, 13
+  xy: 1, 1
   size: 225, 225
   orig: 225, 225
   offset: 0, 0
   index: -1
+gear/autoloot
+  rotate: false
+  xy: 1279, 647
+  size: 598, 598
+  orig: 600, 600
+  offset: 1, 1
+  index: -1
+gear/blm
+  rotate: false
+  xy: 1, 228
+  size: 1276, 1807
+  orig: 2048, 2048
+  offset: 383, 126
+  index: -1
+gear/body
+  rotate: false
+  xy: 1279, 1247
+  size: 700, 788
+  orig: 1014, 870
+  offset: 157, 0
+  index: -1
+gear/chicken
+  rotate: false
+  xy: 1279, 152
+  size: 388, 493
+  orig: 500, 500
+  offset: 45, 4
+  index: -1
+gear/list
+  rotate: false
+  xy: 1669, 30
+  size: 339, 322
+  orig: 512, 512
+  offset: 95, 95
+  index: -1
+gear/shovel
+  rotate: false
+  xy: 228, 28
+  size: 171, 198
+  orig: 174, 200
+  offset: 2, 1
+  index: -1
+gear/tier
+  rotate: false
+  xy: 1669, 354
+  size: 356, 291
+  orig: 364, 300
+  offset: 2, 5
+  index: -1
 ui/ui-chat-gift-button-icon
   rotate: false
-  xy: 228, 93
+  xy: 1879, 1100
   size: 145, 145
   orig: 145, 145
   offset: 0, 0
+  index: -1
+
+gameatlas2.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+gear/ak47
+  rotate: false
+  xy: 1412, 1274
+  size: 501, 252
+  orig: 512, 384
+  offset: 3, 67
+  index: -1
+gear/fist
+  rotate: false
+  xy: 971, 597
+  size: 503, 315
+  orig: 512, 512
+  offset: 8, 92
+  index: -1
+gear/flag
+  rotate: false
+  xy: 971, 277
+  size: 500, 318
+  orig: 500, 318
+  offset: 0, 0
+  index: -1
+gear/foot
+  rotate: false
+  xy: 1, 914
+  size: 1409, 935
+  orig: 1523, 1015
+  offset: 60, 80
+  index: -1
+gear/gloves
+  rotate: false
+  xy: 1412, 1528
+  size: 455, 321
+  orig: 512, 384
+  offset: 25, 40
+  index: -1
+gear/info
+  rotate: false
+  xy: 1476, 473
+  size: 244, 454
+  orig: 512, 512
+  offset: 134, 29
+  index: -1
+gear/melee
+  rotate: false
+  xy: 1412, 929
+  size: 422, 343
+  orig: 512, 384
+  offset: 65, 14
+  index: -1
+gear/peticon
+  rotate: false
+  xy: 1473, 21
+  size: 452, 450
+  orig: 512, 512
+  offset: 30, 31
+  index: -1
+gear/star
+  rotate: false
+  xy: 1, 1
+  size: 968, 911
+  orig: 1024, 976
+  offset: 30, 44
+  index: -1
+
+gameatlas3.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+gear/grenade
+  rotate: false
+  xy: 1, 1
+  size: 1049, 1249
+  orig: 1164, 1438
+  offset: 0, 34
+  index: -1
+gear/pet
+  rotate: false
+  xy: 1052, 78
+  size: 923, 1172
+  orig: 1100, 1272
+  offset: 81, 53
+  index: -1
+
+gameatlas4.png
+size: 2048, 2048
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+gear/head
+  rotate: false
+  xy: 1, 1
+  size: 1192, 1153
+  orig: 1383, 1536
+  offset: 96, 191
   index: -1

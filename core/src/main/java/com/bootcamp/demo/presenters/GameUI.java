@@ -1,7 +1,5 @@
 package com.bootcamp.demo.presenters;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -14,17 +12,14 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.bootcamp.demo.engine.Labels;
 import com.bootcamp.demo.engine.Resources;
-import com.bootcamp.demo.engine.Squircle;
-import com.bootcamp.demo.engine.widgets.OffsetButton;
 import com.bootcamp.demo.engine.widgets.PressableTable;
 import com.bootcamp.demo.events.core.EventListener;
 import com.bootcamp.demo.events.core.EventModule;
 import com.bootcamp.demo.localization.GameFont;
 import com.bootcamp.demo.managers.API;
-import com.bootcamp.demo.pages.MissionsPage;
+import com.bootcamp.demo.pages.LootingPage;
 import com.bootcamp.demo.pages.core.APage;
 import com.bootcamp.demo.pages.core.PageManager;
-import jdk.internal.loader.Resource;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -58,7 +53,7 @@ public class GameUI extends ScreenAdapter implements Disposable, EventListener {
 //        final Table grid = constructGrid(3, 4);
 //        rootUI.add(grid).padLeft(50).padRight(50);
 
-        API.get(PageManager.class).show(MissionsPage.class);
+        API.get(PageManager.class).show(LootingPage.class);
 
     }
 
