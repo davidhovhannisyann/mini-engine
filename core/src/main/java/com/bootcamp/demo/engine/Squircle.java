@@ -77,26 +77,26 @@ public enum Squircle {
     }
 
     public Drawable getDrawable(Color color) {
-        return Resources.getDrawable("basics/" + name + "-" + radius, color);
+        return Resources.getDrawable("ui/" + name + "-" + radius, color);
     }
 
     public static Drawable getSquircle (int radius, Color color) {
-        return Resources.getDrawable("basics/ui-white-squircle-" + radius, color);
+        return Resources.getDrawable("ui/ui-white-squircle-" + radius, color);
     }
 
     public static Drawable getSquircleBtm (int radius, Color color) {
-        return Resources.getDrawable("basics/ui-white-squircle-bottom-" + radius, color);
+        return Resources.getDrawable("ui/ui-white-squircle-bottom-" + radius, color);
     }
 
     public static Drawable getBorder (int radius, Color color) {
-        return Resources.getDrawable("basics/ui-white-squircle-border-" + radius, color);
+        return Resources.getDrawable("ui/ui-white-squircle-border-" + radius, color);
     }
 
     public static Drawable getBorderRight (int radius, Color color) {
-        return Resources.getDrawable("basics/ui-white-squircle-border-right" + radius, color);
+        return Resources.getDrawable("ui/ui-white-squircle-border-right" + radius, color);
     }
 
     public static Drawable getLeaf (int radius, Color color) {
-        return Resources.getDrawable("basics/ui-white-leaf-" + radius, color);
+        return Resources.getDrawable("ui/ui-white-leaf-" + radius, color);
     }
 }
