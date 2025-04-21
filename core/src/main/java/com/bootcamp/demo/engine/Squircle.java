@@ -68,7 +68,7 @@ public enum Squircle {
     }
 
     public String getRegionName() {
-        return "basics/" + name + "-" + radius;
+        return "ui/" + name + "-" + radius;
     }
 
     public Drawable getDrawable() {

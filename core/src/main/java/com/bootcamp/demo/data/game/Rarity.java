@@ -1,4 +1,4 @@
-package com.bootcamp.demo.engine;
+package com.bootcamp.demo.data.game;
 
 public enum Rarity {
     COMMON,

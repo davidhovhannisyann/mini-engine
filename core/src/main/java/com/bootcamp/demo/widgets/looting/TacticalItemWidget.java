@@ -1,10 +1,9 @@
 package com.bootcamp.demo.widgets.looting;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
 import com.bootcamp.demo.engine.ColorLibrary;
-import com.bootcamp.demo.engine.Rarity;
+import com.bootcamp.demo.data.game.Rarity;
 import com.bootcamp.demo.engine.Resources;
 import com.bootcamp.demo.engine.Squircle;
 import com.bootcamp.demo.engine.widgets.BorderedTable;

@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Scaling;
+import com.bootcamp.demo.data.game.Rarity;
 import com.bootcamp.demo.engine.*;
 import com.bootcamp.demo.engine.widgets.BorderedTable;
 import com.bootcamp.demo.localization.GameFont;

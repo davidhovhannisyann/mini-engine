@@ -2,6 +2,7 @@ package com.bootcamp.demo.engine;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.ObjectMap;
+import com.bootcamp.demo.data.game.Rarity;
 import lombok.Getter;
 
 public class ColorLibrary {
