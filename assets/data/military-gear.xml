@@ -1,0 +1,20 @@
+<root>
+    <weapon>
+        <item name="ak47" title="AK-47" icon="gear/ak47"/>
+    </weapon>
+    <melee>
+        <item name="knife" title="Knife" icon="gear/melee"/>
+    </melee>
+    <head>
+        <item name="doom-helmet" title="DOOM Helmet" icon="gear/head"/>
+    </head>
+    <body>
+        <item name="vest" title="Vest" icon="gear/body"/>
+    </body>
+    <gloves>
+        <item name="gloves" title="Gloves" icon="gear/gloves"/>
+    </gloves>
+    <shoes>
+        <item name="crocs" title="Crocs" icon="gear/foot"/>
+    </shoes>
+</root>

@@ -2,6 +2,7 @@ package com.bootcamp.demo.engine;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.bootcamp.demo.managers.API;
 import lombok.Getter;
 
 public enum Squircle {

@@ -6,9 +6,11 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.*;
 import com.bootcamp.demo.data.game.GameData;
+import com.bootcamp.demo.data.game.MilitaryGearSlot;
+import com.bootcamp.demo.data.game.TacticalItemData;
+import com.bootcamp.demo.data.save.MilitaryGearSaveData;
 import com.bootcamp.demo.data.save.SaveData;
 import com.bootcamp.demo.data.save.TacticalSaveData;
-import com.bootcamp.demo.data.save.TacticalsSaveData;
 import com.bootcamp.demo.events.GameStartedEvent;
 import com.bootcamp.demo.managers.API;
 import com.bootcamp.demo.events.core.EventModule;
@@ -25,11 +27,23 @@ public class DemoGame extends Game {
 
         loadSaveData();
 
-        final TacticalSaveData tacticalsSaveData = new TacticalSaveData();
-        tacticalsSaveData.setName("present");
-        tacticalsSaveData.setLevel(3);
+        final MilitaryGearSaveData militaryGearSaveData = new MilitaryGearSaveData();
+        militaryGearSaveData.setName("ak47");
+        militaryGearSaveData.setLevel(3);
 
-        API.get(SaveData.class).getTacticalsSaveData().getTacticals().put(0, tacticalsSaveData);
+        API.get(SaveData.class).getEquippedMilitaryGearsSaveData().getEquippedMilitaryGears().put(MilitaryGearSlot.WEAPON, militaryGearSaveData);
+
+        final TacticalSaveData tacticalSaveData = new TacticalSaveData();
+        tacticalSaveData.setName("grenade");
+        tacticalSaveData.setLevel(5);
+        tacticalSaveData.setCount(0);
+        final TacticalSaveData tacticalSaveData2 = new TacticalSaveData();
+        tacticalSaveData2.setName("compass");
+        tacticalSaveData2.setLevel(7);
+        tacticalSaveData2.setCount(0);
+
+        API.get(SaveData.class).getEquippedTacitcalsSaveData().getEquippedTacitcals().add(tacticalSaveData);
+        API.get(SaveData.class).getEquippedTacitcalsSaveData().getEquippedTacitcals().add(tacticalSaveData2);
         savePlayerData();
 
         setScreen(new GameScreen());

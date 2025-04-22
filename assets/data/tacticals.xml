@@ -1,3 +1,4 @@
 <root>
-    <tactical name="present" icon="gear/grenade"/>
+    <tactical name="grenade" title="Grenade" icon="gear/grenade" rarity="rare"></tactical>
+    <tactical name="compass" title="Grenade" icon="gear/grenade" rarity="epic"></tactical>
 </root>

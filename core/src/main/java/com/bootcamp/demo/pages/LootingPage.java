@@ -6,22 +6,30 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Scaling;
+import com.bootcamp.demo.data.game.MStat;
+import com.bootcamp.demo.data.game.MilitaryGearSlot;
 import com.bootcamp.demo.data.game.Rarity;
+import com.bootcamp.demo.data.save.MilitaryGearSaveData;
+import com.bootcamp.demo.data.save.SaveData;
+import com.bootcamp.demo.data.save.StatsSaveData;
+import com.bootcamp.demo.data.save.TacticalSaveData;
 import com.bootcamp.demo.engine.*;
 import com.bootcamp.demo.engine.widgets.*;
 import com.bootcamp.demo.localization.GameFont;
+import com.bootcamp.demo.managers.API;
 import com.bootcamp.demo.pages.core.APage;
 import com.bootcamp.demo.widgets.looting.MilitaryGearWidget;
 import com.bootcamp.demo.widgets.looting.StatWidget;
 import com.bootcamp.demo.widgets.looting.TacticalItemWidget;
 
-import java.util.Random;
-
 public class LootingPage extends APage {
     public Label powerLabel;
     // stat segment
     public WidgetsContainer<StatWidget> statsContainer;
+    private TacticalItemContainer tacticalContainer;
+    private MilitaryGearContainer militaryGearContainer;
 
     @Override
     protected void constructContent (Table content) {
@@ -76,13 +84,10 @@ public class LootingPage extends APage {
         statsContainer = new WidgetsContainer<>(300, 30, 3, 30, 70);
         statsContainer.pad(20);
 
-        StatWidget.MStat[] stats = StatWidget.MStat.values();
-        Random randomValue = new Random();
-        for (int i = 0; i < stats.length; i++) {
-            final StatWidget stat = new StatWidget();
-            float value = randomValue.nextInt(0, 10);
-            stat.setData(stats[i], value);
-            statsContainer.add(stat);
+        MStat[] stats = MStat.values();
+        for (MStat stat : stats) {
+            final StatWidget statWidget = new StatWidget(stat);
+            statsContainer.add(statWidget);
         }
 
         final Image infoImage = new Image(Resources.getDrawable("gear/list"));
@@ -92,7 +97,8 @@ public class LootingPage extends APage {
         allStatsButton.setBackground(Squircle.SQUIRCLE_35.getDrawable(ColorLibrary.COLORS.WHITE.getColor()));
         allStatsButton.setBorderDrawable(Squircle.SQUIRCLE_35_BORDER.getDrawable(ColorLibrary.COLORS.BORDER.getColor()));
         allStatsButton.add(infoImage);
-        allStatsButton.setOnClick(() -> {});
+        allStatsButton.setOnClick(() -> {
+        });
 
         final Table segment = new Table();
         segment.pad(20);
@@ -106,7 +112,7 @@ public class LootingPage extends APage {
 
     public Table constructGearSegment () {
 
-        final MilitaryGearContainer militaryGearContainer = new MilitaryGearContainer();
+        militaryGearContainer = new MilitaryGearContainer();
         final Table extraSegment = constructExtraSegment();
 
         final Table segment = new Table();
@@ -119,7 +125,7 @@ public class LootingPage extends APage {
 
     private Table constructExtraSegment () {
 
-        TacticalItemContainer tacticalContainer = new TacticalItemContainer();
+        tacticalContainer = new TacticalItemContainer();
         final FlagContainer flagContainer = new FlagContainer();
 
         final Table column1 = new Table();
@@ -177,10 +183,8 @@ public class LootingPage extends APage {
             skinsetInfoTable.add(skinSetInfoButton).expandX().right().size(100, 80);
 
             gearContainer = new WidgetsContainer<>(250, 250, 3, 30, 30);
-            for (int i = 0; i < 6; i++) {
-                MilitaryGearWidget.GEAR_PARTS[] values = MilitaryGearWidget.GEAR_PARTS.values();
+            for (int i = 0; i < MilitaryGearSlot.values().length; i++) {
                 final MilitaryGearWidget gear = new MilitaryGearWidget();
-                gear.setData(Rarity.COMMON, values[i]);
                 gearContainer.add(gear);
             }
 
@@ -190,6 +194,21 @@ public class LootingPage extends APage {
             add(skinsetInfoTable).height(70).grow();
             row();
             add(gearContainer);
+        }
+
+        public void setData () {
+            ObjectMap<MilitaryGearSlot, MilitaryGearSaveData> equippedMilitaryGears = API.get(SaveData.class).getEquippedMilitaryGearsSaveData().getEquippedMilitaryGears();
+            Array<MilitaryGearWidget> widgets = gearContainer.getWidgets();
+            MilitaryGearSlot[] values = MilitaryGearSlot.values();
+
+            for (int i = 0; i < values.length; i++) {
+                MilitaryGearSaveData militaryGearSaveData = equippedMilitaryGears.get(values[i]);
+                if (militaryGearSaveData == null) {
+                    widgets.get(i).setDefault(values[i]);
+                    continue;
+                }
+                widgets.get(i).setData(militaryGearSaveData);
+            }
         }
     }
 
@@ -211,12 +230,16 @@ public class LootingPage extends APage {
                 items.add(gear);
             }
 
-            for (int i = 0; i < items.size/2; i++) {
-                items.get(i).setData(Rarity.EXOTIC);
-            }
-
             setPressedScale(0.93f);
             add(container);
+        }
+
+        public void setData () {
+            Array<TacticalSaveData> equippedTacitcals = API.get(SaveData.class).getEquippedTacitcalsSaveData().getEquippedTacitcals();
+            Array<TacticalItemWidget> widgets = container.getWidgets();
+            for (int i = 0; i < equippedTacitcals.size; i++) {
+                widgets.get(i).setData(equippedTacitcals.get(i));
+            }
         }
     }
 
@@ -270,5 +293,24 @@ public class LootingPage extends APage {
             icon.setDrawable(Resources.getDrawable("gear/chicken"));
 
         }
+    }
+
+    public void setStatsData () {
+        ObjectMap<MStat, StatsSaveData.StatSaveData> statMap = API.get(SaveData.class).getStatsSaveData().getStatsMap();
+        for (StatWidget widget : statsContainer.getWidgets()) {
+            widget.setData(statMap.get(widget.getStat()));
+        }
+    }
+
+    public void reEvaluateContainers () {
+        tacticalContainer.setData();
+        militaryGearContainer.setData();
+        setStatsData();
+    }
+
+    @Override
+    public void show (Runnable onComplete) {
+        super.show(onComplete);
+        reEvaluateContainers();
     }
 }

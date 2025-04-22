@@ -1,22 +1,32 @@
 package com.bootcamp.demo.widgets.looting;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.ObjectMap;
 import com.badlogic.gdx.utils.Scaling;
+import com.bootcamp.demo.data.game.GameData;
+import com.bootcamp.demo.data.game.MilitaryGearGameData;
+import com.bootcamp.demo.data.game.MilitaryGearSlot;
 import com.bootcamp.demo.data.game.Rarity;
+import com.bootcamp.demo.data.save.MilitaryGearSaveData;
 import com.bootcamp.demo.engine.*;
 import com.bootcamp.demo.engine.widgets.BorderedTable;
 import com.bootcamp.demo.localization.GameFont;
-import lombok.Getter;
+import com.bootcamp.demo.managers.API;
+
+import java.util.Locale;
 
 public class MilitaryGearWidget extends BorderedTable {
 
     private final Label levelLabel;
     private final Image gearIcon;
+    private final Cell<Image> iconCell;
     private final Image tierIcon;
     private final Image starIcon;
+    private final Table overlay;
     private Rarity rarity;
 
     public MilitaryGearWidget () {
@@ -31,38 +41,33 @@ public class MilitaryGearWidget extends BorderedTable {
         tierIcon = new Image(Resources.getDrawable("gear/tier"));
         starIcon = new Image(Resources.getDrawable("gear/star"));
 
-        final Table overlay = new Table();
+        this.overlay = new Table();
         overlay.add(starIcon).expand().left().top().size(50).pad(15);
         overlay.row();
         overlay.add(levelLabel).expand().left().bottom().padBottom(15).padLeft(20);
         overlay.add(tierIcon).expand().right().bottom().padRight(20).padBottom(15).size(50);
         overlay.setFillParent(true);
 
-        add(gearIcon).grow().pad(25);
+        iconCell = add(gearIcon).grow().pad(35);
         addActor(overlay);
+
+        overlay.setVisible(false);
     }
 
-    // Fake setData
-    public void setData (Rarity rarity, GEAR_PARTS gear) {
-        this.rarity = rarity;
+    public void setData (MilitaryGearSaveData gearData) {
+        overlay.setVisible(true);
+
+        this.rarity = gearData.getRarity();
         setBackground(Squircle.SQUIRCLE_35.getDrawable(ColorLibrary.getRarityColors().get(rarity)));
-        gearIcon.setDrawable(Resources.getDrawable(gear.getDrawablePath()));
+        levelLabel.setText("Lv. " + gearData.getLevel());
+
+        ObjectMap<String, MilitaryGearGameData> militaryGearMap = API.get(GameData.class).getMilitaryGearsGameData().getMilitaryGearMap();
+        MilitaryGearGameData militaryGearGameData = militaryGearMap.get(gearData.getName());
+        gearIcon.setDrawable(militaryGearGameData.getIcon());
     }
 
-    // Fake enum just to make this work
-    public enum GEAR_PARTS {
-        WEAPON("gear/ak47"),
-        MELEE("gear/melee"),
-        HEAD("gear/head"),
-        BODY("gear/body"),
-        GLOVES("gear/gloves"),
-        FEET("gear/foot");
-
-        @Getter
-        private final String drawablePath;
-
-        GEAR_PARTS (String drawablePath) {
-            this.drawablePath = drawablePath;
-        }
+    public void setDefault (MilitaryGearSlot slot) {
+        String file = slot.name().toLowerCase(Locale.ENGLISH);
+        gearIcon.setDrawable(Resources.getDrawable("gear/default/" + file, ColorLibrary.COLORS.GRAY_BROWN.getColor()));
     }
 }
