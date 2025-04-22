@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.bootcamp.demo.data.game.MStat;
-import com.bootcamp.demo.data.save.StatsSaveData;
 import com.bootcamp.demo.engine.Labels;
 import com.bootcamp.demo.localization.GameFont;
 import lombok.Getter;
@@ -26,11 +25,13 @@ public class StatWidget extends Table {
         this.stat = stat;
     }
 
-    public void setData (StatsSaveData.StatSaveData data) {
+    public void setData (MStat stat, float value) {
         statLabel.setText(stat.name());
-        String value = String.valueOf(data.getValue());
-        value = (stat.equals(MStat.HP) || stat.equals(MStat.ATK)) ? value : value + "%";
-        valueLabel.setText(value);
+        if (stat.equals(MStat.HP) || stat.equals(MStat.ATK)) {
+            valueLabel.setText(String.valueOf((int) value));
+        } else {
+            valueLabel.setText(String.valueOf(value) + "%");
+        }
     }
 
 }

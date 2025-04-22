@@ -1,4 +1,6 @@
 <root>
-    <tactical name="grenade" title="Grenade" icon="gear/grenade" rarity="rare"></tactical>
+    <tactical name="grenade" title="Grenade" icon="gear/grenade" rarity="rare">
+        <activeStat stat="STUN" value="0.5"></activeStat>
+    </tactical>
     <tactical name="compass" title="Grenade" icon="gear/grenade" rarity="epic"></tactical>
 </root>

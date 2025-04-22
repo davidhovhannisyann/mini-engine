@@ -13,7 +13,6 @@ import com.bootcamp.demo.data.game.MilitaryGearSlot;
 import com.bootcamp.demo.data.game.Rarity;
 import com.bootcamp.demo.data.save.MilitaryGearSaveData;
 import com.bootcamp.demo.data.save.SaveData;
-import com.bootcamp.demo.data.save.StatsSaveData;
 import com.bootcamp.demo.data.save.TacticalSaveData;
 import com.bootcamp.demo.engine.*;
 import com.bootcamp.demo.engine.widgets.*;
@@ -296,9 +295,10 @@ public class LootingPage extends APage {
     }
 
     public void setStatsData () {
-        ObjectMap<MStat, StatsSaveData.StatSaveData> statMap = API.get(SaveData.class).getStatsSaveData().getStatsMap();
+        API.get(SaveData.class).calculateCurrentStats();
+        ObjectMap<MStat, Float> statMap = SaveData.getStatMap();
         for (StatWidget widget : statsContainer.getWidgets()) {
-            widget.setData(statMap.get(widget.getStat()));
+            widget.setData(widget.getStat(), statMap.get(widget.getStat()));
         }
     }
 
