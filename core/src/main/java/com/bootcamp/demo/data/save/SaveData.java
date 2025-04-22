@@ -1,18 +1,18 @@
 package com.bootcamp.demo.data.save;
 
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectFloatMap;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.bootcamp.demo.data.game.*;
 import com.bootcamp.demo.managers.API;
 import lombok.Getter;
-import lombok.Setter;
 
 public class SaveData {
 
     @Getter
-    private final EquippedMilitaryGearsSaveData equippedMilitaryGearsSaveData = new EquippedMilitaryGearsSaveData();
+    private final EquippedMilitaryGearsSaveData equippedMilitaryGear = new EquippedMilitaryGearsSaveData();
     @Getter
-    private final EquippedTacitcalsSaveData equippedTacitcalsSaveData = new EquippedTacitcalsSaveData();
+    private final EquippedTacitcalsSaveData equippedTacticals = new EquippedTacitcalsSaveData();
     @Getter
     private static final ObjectMap<MStat, Float> statMap = new ObjectMap<>();
 
@@ -28,21 +28,28 @@ public class SaveData {
     }
 
     private void calcuateTacticalStats () {
-        Array<TacticalSaveData> equippedTacitcals = equippedTacitcalsSaveData.getEquippedTacitcals();
+        Array<TacticalSaveData> equippedTacitcals = this.equippedTacticals.getEquippedTacitcals();
         TacticalsGameData tacticalsGameData = API.get(GameData.class).getTacticalsGameData();
         ObjectMap<String, TacticalItemData> tacticalsMap = tacticalsGameData.getTacticalsMap();
 
-        for (TacticalSaveData equippedTacitcal : equippedTacitcals) {
-            TacticalItemData tacticalItemData = tacticalsMap.get(equippedTacitcal.getName());
+        for (TacticalSaveData equippedTactical : equippedTacitcals) {
+            TacticalItemData tacticalItemData = tacticalsMap.get(equippedTactical.getName());
             for (ObjectMap.Entry<MStat, Float> stat : tacticalItemData.getStats()) {
-                float value = tacticalItemData.calculateStatBasedOnLevel(stat.key, equippedTacitcal.getLevel());
+                float value = tacticalItemData.calculateStatBasedOnLevel(stat.key, equippedTactical.getLevel());
                 updateStatValue(stat.key, value);
             }
         }
     }
 
     private void calculateMilitaryGearStats() {
-
+        ObjectMap<MilitaryGearSlot, MilitaryGearSaveData> equippedMilitaryGears = equippedMilitaryGear.getEquippedMilitaryGears();
+        MilitaryGearsGameData militaryGearsGameData = API.get(GameData.class).getMilitaryGearsGameData();
+        for (ObjectMap.Entry<MilitaryGearSlot, MilitaryGearSaveData> gear : equippedMilitaryGears) {
+            ObjectFloatMap<MStat> statsMap = gear.value.getStatsMap();
+            for (ObjectFloatMap.Entry<MStat> mStat : statsMap) {
+                updateStatValue(mStat.key, mStat.value);
+            }
+        }
     }
 
     private void updateStatValue(MStat stat, float value) {

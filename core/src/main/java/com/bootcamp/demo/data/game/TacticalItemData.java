@@ -24,7 +24,6 @@ public class TacticalItemData extends MItemData{
         super.load(rootXml);
         String rarity = rootXml.getAttribute("rarity");
         this.rarity = Rarity.valueOf(rarity.toUpperCase(Locale.ENGLISH));
-        this.title = rootXml.getAttribute("title");
 
         int childCount = rootXml.getChildCount();
         for (int i = 0; i < childCount; i++) {

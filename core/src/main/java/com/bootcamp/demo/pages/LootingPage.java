@@ -196,7 +196,7 @@ public class LootingPage extends APage {
         }
 
         public void setData () {
-            ObjectMap<MilitaryGearSlot, MilitaryGearSaveData> equippedMilitaryGears = API.get(SaveData.class).getEquippedMilitaryGearsSaveData().getEquippedMilitaryGears();
+            ObjectMap<MilitaryGearSlot, MilitaryGearSaveData> equippedMilitaryGears = API.get(SaveData.class).getEquippedMilitaryGear().getEquippedMilitaryGears();
             Array<MilitaryGearWidget> widgets = gearContainer.getWidgets();
             MilitaryGearSlot[] values = MilitaryGearSlot.values();
 
@@ -234,7 +234,7 @@ public class LootingPage extends APage {
         }
 
         public void setData () {
-            Array<TacticalSaveData> equippedTacitcals = API.get(SaveData.class).getEquippedTacitcalsSaveData().getEquippedTacitcals();
+            Array<TacticalSaveData> equippedTacitcals = API.get(SaveData.class).getEquippedTacticals().getEquippedTacitcals();
             Array<TacticalItemWidget> widgets = container.getWidgets();
             for (int i = 0; i < equippedTacitcals.size; i++) {
                 widgets.get(i).setData(equippedTacitcals.get(i));

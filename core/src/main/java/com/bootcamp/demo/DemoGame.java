@@ -8,7 +8,6 @@ import com.badlogic.gdx.utils.*;
 import com.bootcamp.demo.data.game.GameData;
 import com.bootcamp.demo.data.game.MStat;
 import com.bootcamp.demo.data.game.MilitaryGearSlot;
-import com.bootcamp.demo.data.game.TacticalItemData;
 import com.bootcamp.demo.data.save.MilitaryGearSaveData;
 import com.bootcamp.demo.data.save.SaveData;
 import com.bootcamp.demo.data.save.TacticalSaveData;
@@ -35,7 +34,15 @@ public class DemoGame extends Game {
         statsMap.put(MStat.HP, 120f);
         statsMap.put(MStat.COMBO, 0.7f);
 
-        API.get(SaveData.class).getEquippedMilitaryGearsSaveData().getEquippedMilitaryGears().put(MilitaryGearSlot.WEAPON, militaryGearSaveData);
+        final MilitaryGearSaveData militaryGearSaveData2 = new MilitaryGearSaveData();
+        militaryGearSaveData2.setName("doom-helmet");
+        militaryGearSaveData2.setLevel(11);
+        ObjectFloatMap<MStat> statsMap2 = militaryGearSaveData2.getStatsMap();
+        statsMap2.put(MStat.ATK, 1120f);
+        statsMap2.put(MStat.STUN, 5.5f);
+
+        API.get(SaveData.class).getEquippedMilitaryGear().getEquippedMilitaryGears().put(MilitaryGearSlot.WEAPON, militaryGearSaveData);
+        API.get(SaveData.class).getEquippedMilitaryGear().getEquippedMilitaryGears().put(MilitaryGearSlot.BODY, militaryGearSaveData2);
 
         final TacticalSaveData tacticalSaveData = new TacticalSaveData();
         tacticalSaveData.setName("grenade");
@@ -46,7 +53,7 @@ public class DemoGame extends Game {
 //        tacticalSaveData2.setLevel(7);
 //        tacticalSaveData2.setCount(0);
 
-        API.get(SaveData.class).getEquippedTacitcalsSaveData().getEquippedTacitcals().add(tacticalSaveData);
+        API.get(SaveData.class).getEquippedTacticals().getEquippedTacitcals().add(tacticalSaveData);
 //        API.get(SaveData.class).getEquippedTacitcalsSaveData().getEquippedTacitcals().add(tacticalSaveData2);
         savePlayerData();
 
